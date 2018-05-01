@@ -13,8 +13,6 @@ import sys
 
 screenname = str(sys.argv[1])
 
-origjson = open('jsons/'+screenname+'-tweets.json')
-failjson = open('failedjsons/'+screenname+'-tweets.json')
 
 # Getting the tweets we've completed:
 actuallydone = pd.read_csv('ratios/{}-ratios.csv'.format(screenname))
@@ -22,7 +20,9 @@ actuallydone.index = actuallydone["Unnamed: 0"]
 actuallydone = actuallydone.drop("Unnamed: 0",axis=1)
 finishedtweets = list(actuallydone['tweet_id'])
 
+
 # List we're cleaning up:
+origjson = open('jsons/'+screenname+'-tweets.json')
 origjsonlist = []
 for line in origjson:
     if line != "\n":
@@ -32,14 +32,20 @@ for j in origjsonlist:
     tweetid = re.search('(?<=,\"id\": ).*(?=\})',str(j)).group(0)
     alltweetids.append(int(tweetid))
 
+
 # Getting the tweets that failed so we don't revisit them:
-failjsonlist = []
-for line in failjson:
-    if line != "\n":
-        failjsonlist.append(line)
-for i in failjsonlist:
-    tweetid = = re.search('(?<=,\"id\": ).*(?=\})',str(i)).group(0)
-    finishedtweets.append(tweetid)
+try:
+    failjson = open('failedjsons/'+screenname+'-failed-tweets.json')
+    failjsonlist = []
+    for line in failjson:
+        if line != "\n":
+            failjsonlist.append(line)
+    for i in failjsonlist:
+        tweetid = re.search('(?<=,\"id\": ).*(?=\})',str(i)).group(0)
+        finishedtweets.append(int(tweetid))
+except:
+    print('no previously viewed tweet failed')
+    pass
 
 # Getting a list of the tweets left to do:
 left = [i for i in alltweetids if i not in finishedtweets]
