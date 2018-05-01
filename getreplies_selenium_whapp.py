@@ -14,7 +14,8 @@ import pickle
 import pandas as pd
 from labMTsimple.storyLab import *
 labMT,labMTvector,labMTwordlist = emotionFileReader(stopval=1.0,lang='english',returnVector= True )
-numchunks = 10
+
+
 def split(a, n):
     k, m = divmod(len(a), n)
     return (a[i * k + min(i, m):(i + 1) * k + min(i + 1, m)] for i in range(n))
@@ -25,11 +26,16 @@ for line in jfile:
     if line != "\n":
         jsons.append(line)
 totaljsons = len(jsons)
+
+numchunks = totaljsons//5
+
 chunks = list(split(jsons, numchunks))
+
 #print(chunks)
 chunk = 0
 numfailed = 0
 t=1
+
 for jsontweets in chunks:
     tweetdict = {}
     for i in jsontweets:
