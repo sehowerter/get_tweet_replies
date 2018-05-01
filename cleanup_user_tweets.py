@@ -9,34 +9,39 @@ import pandas as pd
 from difflib import SequenceMatcher
 import sys
 
-# Cleaning up json files to take out tweets that have already been scraped
+### Cleaning up json files to take out tweets that have already been scraped
 
 screenname = str(sys.argv[1])
 
 origjson = open('jsons/'+screenname+'-tweets.json')
-#finjson = open('finishedjsons/'+screenname+'-tweets.json')
+failjson = open('failedjsons/'+screenname+'-tweets.json')
 
+# Getting the tweets we've completed:
 actuallydone = pd.read_csv('ratios/{}-ratios.csv'.format(screenname))
 actuallydone.index = actuallydone["Unnamed: 0"]
 actuallydone = actuallydone.drop("Unnamed: 0",axis=1)
-
 finishedtweets = list(actuallydone['tweet_id'])
 
+# List we're cleaning up:
 origjsonlist = []
 for line in origjson:
     if line != "\n":
         origjsonlist.append(line)
 alltweetids = []
 for j in origjsonlist:
-    tweetid = re.search('\d{18}',str(j)).group(0)
+    tweetid = re.search('(?<=,\"id\": ).*(?=\})',str(j)).group(0)
     alltweetids.append(int(tweetid))
-#
-# finjsonlist = []
-# for line in finjson:
-#     if line != "\n":
-#         finjsonlist.append(line)
 
+# Getting the tweets that failed so we don't revisit them:
+failjsonlist = []
+for line in failjson:
+    if line != "\n":
+        failjsonlist.append(line)
+for i in failjsonlist:
+    tweetid = = re.search('(?<=,\"id\": ).*(?=\})',str(i)).group(0)
+    finishedtweets.append(tweetid)
 
+# Getting a list of the tweets left to do:
 left = [i for i in alltweetids if i not in finishedtweets]
 
 os.system('mv jsons/{}-tweets.json done/'.format(screenname))
