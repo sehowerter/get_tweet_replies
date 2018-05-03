@@ -1,0 +1,1 @@
+/Applications/anaconda/lib/python3.6/site-packages/labMTsimple/static/hedotools.shifter.js
