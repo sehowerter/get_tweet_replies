@@ -224,6 +224,7 @@ for jsontweets in chunks:
                 elem.send_keys(Keys.END)
                 timetowait = np.random.random_sample()*2 + 2
                 time.sleep(timetowait)
+            print('...')
 
 
             # Printing all replies to the txt file
@@ -274,7 +275,7 @@ for jsontweets in chunks:
             finishedfile.close()
 
             print('{} out of {} tweet convos read from {} and the happiness score was {}; also {} failed'.format(t,totaljsons,screenname, score,numfailed))
-            pickle_out = open("ratiodict{}.pkl".format(screenname),"wb")
+            pickle_out = open("pickles/ratiodict{}.pkl".format(screenname),"wb")
             pickle.dump(ratiodict, pickle_out)
             pickle_out.close()
 
