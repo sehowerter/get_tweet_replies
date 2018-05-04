@@ -28,9 +28,10 @@ for line in jfile:
 totaljsons = len(jsons)
 
 numchunks = totaljsons//5
-
-chunks = list(split(jsons, numchunks))
-
+if totaljsons > 4:
+    chunks = list(split(jsons, numchunks))
+else:
+    chunks = [jsons]
 #print(chunks)
 chunk = 0
 numfailed = 0
@@ -216,6 +217,7 @@ for jsontweets in chunks:
             # Setting file name and opening txt file for replies to print into
             filename = "{}_{}-{}-{}-id-{}_{}_{}-tweetconvo-{}.txt".format(formatteddate, timez, screenname, tweet,replies,retweets,likes,today)
             f = open("tweet_convos/{}/{}".format(screenname,filename),'a+')
+            print('...')
 
 
             # Getting selenium to scroll to the end of the page
