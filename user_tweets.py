@@ -16,7 +16,7 @@ api = tweepy.API(auth)
 
 screenname = str(sys.argv[1])
 
-stuff = api.user_timeline(screen_name = screenname, count = 100, include_rts = True)
+stuff = api.user_timeline(screen_name = screenname, count = 600, include_rts = True)
 
 
 file = open('jsons/{}-tweets.json'.format(screenname), 'w')
