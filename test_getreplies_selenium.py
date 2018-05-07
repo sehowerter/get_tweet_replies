@@ -14,8 +14,8 @@ import sys
 path_to_firefoxdriver = '/Users/sarahhowerter/Drive/UVM/courses/COcoNuTs/PROJECT/getreplies/geckodriver' # change path as needed
 driver = webdriver.Firefox(executable_path = path_to_firefoxdriver)
 
-screenname = 'realDonaldTrump'
-tweet = '988405962624118785'
+screenname = 'kanyewest'
+tweet = '991117050289405952'
 url = 'http://twitter.com/{}/status/{}'.format(screenname,tweet)
 
 #Making file directories for screenname if they don't exist
@@ -46,18 +46,26 @@ day = int(date[3])
 month = strptime(date[4],'%b').tm_mon
 year = int(date[5])
 formatteddate = dt.date(year,month,day).isoformat()
+print(formatteddate)
 today = dt.datetime.now().strftime('%Y-%m-%d_%H_%M_%S')
 
 # Get RATIO
 replies = driver.find_element_by_xpath('/html/body/div[30]/div[2]/div[3]/div/div/div[1]/div[1]/div/div[4]/div[2]/div[1]/button')
 replies = replies.text.split()[1]
-print(replies)
+print('replies = ',replies)
 retweets = driver.find_element_by_xpath('/html/body/div[30]/div[2]/div[3]/div/div/div[1]/div[1]/div/div[3]/div[3]/ul/li[1]/a/strong')
 retweets = re.sub(',','',retweets.text)
-print(retweets)
+print('retweets = ',retweets)
 likes = driver.find_element_by_xpath('/html/body/div[30]/div[2]/div[3]/div/div/div[1]/div[1]/div/div[3]/div[3]/ul/li[2]/a/strong')
 likes = re.sub(',','',likes.text)
-print(likes)
+print('likes = ',likes)
+# Getting selenium to scroll to the end of the page
+elem = driver.find_element_by_css_selector('body')
+for i in range(16):
+    elem.send_keys(Keys.END)
+    timetowait = np.random.random_sample()*2 + 2
+    time.sleep(timetowait)
+print('...')
 '''
 filename = "{}_{}-{}-{}-tweet-convo-{}.txt".format(formatteddate, timez, screenname, tweet, today)
 f = open("tweet_convos/{}/{}".format(screenname,filename),'a+')
