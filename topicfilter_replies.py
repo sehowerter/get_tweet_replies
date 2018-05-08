@@ -14,7 +14,7 @@ from labMTsimple.storyLab import *
 labMT,labMTvector,labMTwordlist = emotionFileReader(stopval=1.0,lang='english',returnVector= True )
 
 
-alltweetfiles = glob.glob('tweet_convos/GeorgeWBush__/*')
+alltweetfiles = glob.glob('tweet_convos/*/*')
 
 users = list(set([re.search('(?<=tweet_convos/).*(?=/)',file).group(0) for file in alltweetfiles]))
 
@@ -37,7 +37,7 @@ for file in tweetfiles:
     alltweetdict[user][tweetid] = {'stopwords':stopwords}
 
 numfiles = len(tweetconvofiles)
-print('Rescoring ',numfiles,' tweets from ',user)
+#print('Rescoring ',numfiles,' tweets from ',user)
 i=1
 for file in tweetconvofiles:
     user = re.search('(?<=tweet_convos/).*(?=/)',file).group(0)
@@ -55,11 +55,12 @@ for file in tweetconvofiles:
 
     score, vector =  emotion(str(tweetconvo),labMT,shift=True,happsList=labMTvector)
 
-    print('The tweet: ',(" ").join(alltweetdict[user][tweetid]['stopwords']))
-    print("^This tweet's original score was ",ratiodf.loc[ratiodf.tweet_id==int(tweetid), 'happ_score'].item(), " and its new happiness score is ",score)
-    print('Total number of words in happiness scoring is ',sum(vector))
+    #print('The tweet: ',(" ").join(alltweetdict[user][tweetid]['stopwords']))
+    #print("^This tweet's original score was ",ratiodf.loc[ratiodf.tweet_id==int(tweetid), 'happ_score'].item(), " and its new happiness score is ",score)
+    #print('Total number of words in happiness scoring is ',sum(vector))
 
     ratiodf.loc[ratiodf.tweet_id==int(tweetid), 'sd_happ_score'] = score
+    ratiodf.loc[ratiodf.tweet_id==int(tweetid), 'sd_happ_words'] = sum(vector)
     ratiodf.loc[ratiodf.tweet_id==int(tweetid), 'tweet'] = (" ").join(alltweetdict[user][tweetid]['stopwords'])
 
     csvfile = 'sd_happ_vectors/{}/{}-tweet-{}-sd_happ_vec'.format(user, user,tweetid)
@@ -68,7 +69,7 @@ for file in tweetconvofiles:
         for val in vector:
             writer.writerow([val])
     dfs[user] = ratiodf
-    print(i,' out of ',numfiles,' finished')
+    #print(i,' out of ',numfiles,' finished')
     i+=1
 
 for user in list(dfs.keys()):
