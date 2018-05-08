@@ -15,10 +15,8 @@ for j in jsons:
 for user in jusers:
 	try:
 		userdf = pd.read_csv('ratios/{}-ratios.csv'.format(user))
-		print('    ',len(list(userdf.index))-1,' tweets finished for ',user)
+		print('    ',len(list(userdf.index)),' tweets finished for ',user)
 		os.system('wc jsons/{}-tweets.json'.format(user))
-		print('     ^ left for ',user)
 	except:
 		print('There are no tweets finished for ',user)
 		os.system('wc jsons/{}-tweets.json'.format(user))
-		print('     ^ left for ',user)	
