@@ -17,6 +17,7 @@ screenname = str(sys.argv[1])
 # Getting the tweets we've completed:
 actuallydone = pd.read_csv('ratios/{}-ratios.csv'.format(screenname))
 actuallydone.index = actuallydone["Unnamed: 0"]
+print('Total done for {} is '.format(screenname),len(actuallydone.index))
 actuallydone = actuallydone.drop("Unnamed: 0",axis=1)
 finishedtweets = list(actuallydone['tweet_id'])
 
@@ -65,7 +66,7 @@ print(str(len(left))+' left for '+screenname)
 convos = glob.glob('tweet_convos/{}/*'.format(screenname))
 
 for c in convos:
-    tweetid = re.search('\d{18}',str(c)).group(0)
+    tweetid = re.search('\d{10,18}',str(c)).group(0)
     if int(tweetid) in left:
         os.system('mkdir dup_tweet_convos/{}'.format(screenname))
         os.system('mv {} dup_tweet_convos/{}'.format(c, screenname))
