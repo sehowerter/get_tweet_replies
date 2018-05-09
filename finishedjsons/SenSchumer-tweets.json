@@ -569,12 +569,18 @@
 {"user":{"screen_name": "SenSchumer"},"id": 864120575190597633}
 {"user":{"screen_name": "SenSchumer"},"id": 863766185447493632}
 {"user":{"screen_name": "SenSchumer"},"id": 863760715429146625}
+<<<<<<< HEAD
 {"user":{"screen_name": "SenSchumer"},"id": 863760488194297856}
 {"user":{"screen_name": "SenSchumer"},"id": 863760438395260932}
+=======
+{"user":{"screen_name": "SenSchumer"},"id": 863760523678109696}
+{"user":{"screen_name": "SenSchumer"},"id": 863760488194297856}
+>>>>>>> d91d31ea74e5b48b13bfb2cb46d8dc73a5b0f804
 {"user":{"screen_name": "SenSchumer"},"id": 863737405999898625}
 {"user":{"screen_name": "SenSchumer"},"id": 863737394243219457}
 {"user":{"screen_name": "SenSchumer"},"id": 863736986913447936}
 {"user":{"screen_name": "SenSchumer"},"id": 863547006962343936}
+<<<<<<< HEAD
 {"user":{"screen_name": "SenSchumer"},"id": 862773935808630785}
 {"user":{"screen_name": "SenSchumer"},"id": 862769443084095488}
 {"user":{"screen_name": "SenSchumer"},"id": 862730753955835905}
@@ -830,3 +836,5 @@
 {"user":{"screen_name": "SenSchumer"},"id": 845280570947129346}
 {"user":{"screen_name": "SenSchumer"},"id": 845280080100311040}
 {"user":{"screen_name": "SenSchumer"},"id": 845270164396523520}
+=======
+>>>>>>> d91d31ea74e5b48b13bfb2cb46d8dc73a5b0f804
