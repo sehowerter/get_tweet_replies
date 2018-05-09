@@ -5,7 +5,7 @@ import pandas as pd
 import re
 import os
 
-senators = pd.read_csv('senators.csv',encoding='latin-1')
+senators = pd.read_csv('trump.csv',encoding='latin-1')
 
 senators_dict = {}
 
