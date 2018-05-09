@@ -3,7 +3,7 @@ import sys
 import pandas as pd
 import re
 
-senators = pd.read_csv("senators.csv")
+senators = pd.read_csv("obama.csv")
 
 for i in senators.index:
 	senator_handle = re.search('(?<=/twitter.com/).*(?=/status/)',
